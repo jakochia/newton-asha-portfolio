@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton Asha - Software Engineer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS for contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your public key
+        emailjs.init('oqHBWxkkUEGrD69aR');
+    </script>
+    <style>
+        /* Custom styles for a more polished look */
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border: 5px solid #3b82f6;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .skill-bar {
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 17px;
+            width: 2px;
+            height: calc(100% + 13px);
+            background: #d1d5db;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        /* Modal styles for CV viewing */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10000;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            color: #000;
+            background: #f1f1f1;
+        }
+        
+        .cv-viewer {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .cv-viewer {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-blue-600">Newton Asha</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link font-medium">Home</a>
+                <a href="#about" class="nav-link font-medium">About</a>
+                <a href="#cv" class="nav-link font-medium">CV</a>
+                <a href="#skills" class="nav-link font-medium">Skills</a>
+                <a href="#contact" class="nav-link font-medium">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-blue-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white px-4 py-3 shadow-md">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link font-medium py-2">Home</a>
+                <a href="#about" class="nav-link font-medium py-2">About</a>
+                <a href="#cv" class="nav-link font-medium py-2">CV</a>
+                <a href="#skills" class="nav-link font-medium py-2">Skills</a>
+                <a href="#contact" class="nav-link font-medium py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-16 md:py-24 bg-gradient-to-r from-blue-50 to-gray-100">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/3 flex justify-center mb-10 md:mb-0">
+                <!-- Profile Picture -->
+                <div class="profile-img rounded-full overflow-hidden bg-gradient-to-r from-blue-200 to-blue-400">
+                    <img src="asha.jpg" alt="Newton Asha" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div class="md:w-2/3 md:pl-12 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Newton Asha Ombuya</h1>
+                <h2 class="text-2xl md:text-3xl text-blue-600 font-semibold mb-6">Software Engineering Student</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl">
+                    Passionate software engineering student with a focus on ethical hacking, IT support, and network fundamentals. 
+                    Seeking to apply technical skills and knowledge to contribute to organizational success.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                        <i class="fas fa-envelope mr-2"></i> Contact Me
+                    </a>
+                    <button id="view-cv-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                        <i class="fas fa-eye mr-2"></i> View CV
+                    </button>
+                    <a href="#cv" class="bg-white hover:bg-gray-100 text-blue-600 font-medium py-3 px-6 rounded-lg border border-blue-600 transition duration-300">
+                        <i class="fas fa-file-alt mr-2"></i> CV Section
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="section-card bg-gray-50 p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Personal Details</h3>
+                    <div class="space-y-4">
+                        <div class="flex">
+                            <div class="w-1/3 font-medium">Full Name:</div>
+                            <div class="w-2/3">Newton Asha Ombuya</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-medium">Date of Birth:</div>
+                            <div class="w-2/3">04 September 2003</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-medium">Nationality:</div>
+                            <div class="w-2/3">Kenyan</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-medium">Languages:</div>
+                            <div class="w-2/3">English, Swahili, Luo</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-medium">Religion:</div>
+                            <div class="w-2/3">Christian</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card bg-gray-50 p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-600 mr-3 w-6"></i>
+                            <a href="tel:0743270114" class="hover:text-blue-600 transition duration-300">0743270114</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-600 mr-3 w-6"></i>
+                            <a href="mailto:ombuyanewton@gmail.com" class="hover:text-blue-600 transition duration-300">ombuyanewton@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-graduation-cap text-blue-600 mr-3 w-6"></i>
+                            <span>Mohi Technical Training Institute</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-3 w-6"></i>
+                            <span>Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold text-blue-600 mt-8 mb-4">Hobbies & Interests</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Travelling</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Reading</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Research</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Technology</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Curriculum Vitae</h2>
+            
+            <!-- CV Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <button id="open-cv-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fas fa-eye mr-2"></i> View Full CV
+                </button>
+                <a href="Asha_Curriculum_Vitae.pdf" download class="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fas fa-download mr-2"></i> Download CV (PDF)
+                </a>
+                <button id="print-cv" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fas fa-print mr-2"></i> Print CV
+                </button>
+            </div>
+            
+            <!-- Career Objective -->
+            <div class="section-card bg-white p-8 rounded-xl shadow-md mb-10">
+                <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                    <i class="fas fa-bullseye mr-3"></i> Career Objective
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    To excel in my career by applying my acquired skills, knowledge, and abilities to deliver effective results in the workplace.
+                </p>
+                <p class="text-gray-700">
+                    To promote teamwork and contribute to the overall development and success of the organization.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Education -->
+                <div class="section-card bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap mr-3"></i> Education & Professional Background
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="timeline-item">
+                            <div class="font-bold text-lg">2024 - Present</div>
+                            <div class="font-semibold text-blue-600">Mohi Technical Training Institute</div>
+                            <div class="text-gray-700">Diploma in Software Engineering</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="font-bold text-lg">2010 - 2019</div>
+                            <div class="font-semibold text-blue-600">Gathiru-in Boys' High School</div>
+                            <div class="text-gray-700">Kenya Certificate of Secondary Education (KCSE)</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="font-bold text-lg">Primary Education</div>
+                            <div class="font-semibold text-blue-600">Missions of Hope International, Mathare North</div>
+                            <div class="text-gray-700">Kenya Certificate of Primary Education (KCPE)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Training & Certifications -->
+                <div class="section-card bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <i class="fas fa-certificate mr-3"></i> Training & Certifications
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold">Ethical Hacking (Basic/Intermediate)</div>
+                                <div class="text-gray-600 text-sm">Practical exposure to Kali Linux tools and ethical testing concepts</div>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold">IT Support Training</div>
+                                <div class="text-gray-600 text-sm">Troubleshooting, hardware & software support processes</div>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold">Basic IT Support Course</div>
+                                <div class="text-gray-600 text-sm">Fundamental networking, system setup, and user support skills</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Leadership Experience -->
+                <div class="section-card bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <i class="fas fa-users mr-3"></i> Leadership Experience
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <i class="fas fa-star text-yellow-500 mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold">SDA Secretary</div>
+                                <div class="text-gray-600">High School Leadership Role</div>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <i class="fas fa-star text-yellow-500 mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold">Class Assistant Representative</div>
+                                <div class="text-gray-600">Represented classmates and assisted in coordination</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Referees -->
+                <div class="section-card bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <i class="fas fa-user-tie mr-3"></i> Referees
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="font-bold text-lg">Sir Simon Maina</div>
+                            <div class="text-gray-600">Lecturer, Mohi Technical Training Institute</div>
+                            <div class="mt-2">
+                                <div class="flex items-center text-sm">
+                                    <i class="fas fa-phone text-blue-600 mr-2"></i>
+                                    <a href="tel:0740450112" class="hover:text-blue-600">0740450112</a>
+                                </div>
+                                <div class="flex items-center text-sm mt-1">
+                                    <i class="fas fa-envelope text-blue-600 mr-2"></i>
+                                    <a href="mailto:simonmaish,683@gmail.com" class="hover:text-blue-600">simonmaish,683@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 rounded-lg">
+                            <div class="font-bold text-lg">Madam Esther Mugure</div>
+                            <div class="text-gray-600">Lecturer, Mohi Technical Training Institute</div>
+                            <div class="mt-2">
+                                <div class="flex items-center text-sm">
+                                    <i class="fas fa-phone text-blue-600 mr-2"></i>
+                                    <a href="tel:0729148833" class="hover:text-blue-600">0729148833</a>
+                                </div>
+                                <div class="flex items-center text-sm mt-1">
+                                    <i class="fas fa-envelope text-blue-600 mr-2"></i>
+                                    <a href="mailto:elsymugurel@gmail.com" class="hover:text-blue-600">elsymugurel@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Technical & Professional Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="section-card bg-gray-50 p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Networking Fundamentals</span>
+                                <span class="font-medium text-blue-600">85%</span>
+                            </div>
+                            <div class="skill-bar bg-gray-300">
+                                <div class="skill-fill bg-blue-600" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">System Administration & IT Support</span>
+                                <span class="font-medium text-blue-600">80%</span>
+                            </div>
+                            <div class="skill-bar bg-gray-300">
+                                <div class="skill-fill bg-blue-600" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Ethical Hacking Basics</span>
+                                <span class="font-medium text-blue-600">75%</span>
+                            </div>
+                            <div class="skill-bar bg-gray-300">
+                                <div class="skill-fill bg-blue-600" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card bg-gray-50 p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Professional Skills</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="font-medium">Problem Solving</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="font-medium">Teamwork & Collaboration</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="font-medium">Ability to Work with Minimal Supervision</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="font-medium">Good Communication Skills</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span class="font-medium">Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gradient-to-r from-blue-50 to-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Contact Me</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="section-card bg-white p-8 rounded-xl shadow-md">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block font-medium mb-2">Full Name *</label>
+                                <input type="text" id="name" name="name" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block font-medium mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block font-medium mb-2">Subject *</label>
+                            <input type="text" id="subject" name="subject" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block font-medium mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"></textarea>
+                        </div>
+                        
+                        <div id="form-message" class="hidden p-4 rounded-lg"></div>
+                        
+                        <div class="text-center">
+                            <button type="submit" id="submit-btn" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center mx-auto">
+                                <i class="fas fa-paper-plane mr-2"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-12 pt-8 border-t border-gray-200">
+                        <div class="text-center">
+                            <p class="text-gray-600 mb-6">You can also reach me directly through:</p>
+                            <div class="flex flex-wrap justify-center gap-6">
+                                <a href="mailto:ombuyanewton@gmail.com" class="flex items-center text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-envelope text-xl mr-2"></i>
+                                    <span>ombuyanewton@gmail.com</span>
+                                </a>
+                                <a href="tel:0743270114" class="flex items-center text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-phone text-xl mr-2"></i>
+                                    <span>0743270114</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (with social media links) -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="text-2xl font-bold mb-2">Newton Asha</div>
+                    <p class="text-gray-400">Software Engineering Student & IT Professional</p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="mt-4">
+                        <h4 class="text-lg font-semibold mb-3">Follow Me</h4>
+                        <div class="flex space-x-3">
+                            <a href="https://twitter.com/j_kochia" target="_blank" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/la.flame.drone" target="_blank" class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white hover:opacity-90 transition-colors duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/jakochia" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-gray-900 transition-colors duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/newton-ombuya-776566356" target="_blank" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6 md:mb-0">
+                    <div class="flex space-x-6">
+                        <a href="mailto:ombuyanewton@gmail.com" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                        <a href="tel:0743270114" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fas fa-phone text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">
+                        &copy; <span id="current-year"></span> Newton Asha. All rights reserved.
+                    </p>
+                    <p class="text-gray-500 text-sm mt-1">
+                        Nairobi, Kenya
+                    </p>
+                    <p class="text-gray-400 text-sm mt-4">
+                        Connect with me on social media
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CV Modal for viewing PDF -->
+    <div id="cv-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-center text-blue-600 mb-4">Newton Asha - Curriculum Vitae</h2>
+                <div class="flex flex-wrap justify-center gap-4 mb-4">
+                    <a href="Asha_Curriculum_Vitae.pdf" download class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                        <i class="fas fa-download mr-2"></i> Download PDF
+                    </a>
+                    <button id="print-cv-modal" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                        <i class="fas fa-print mr-2"></i> Print
+                    </button>
+                    <button id="close-cv-modal" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                        <i class="fas fa-times mr-2"></i> Close
+                    </button>
+                </div>
+            </div>
+            <iframe src="Asha_Curriculum_Vitae.pdf" class="cv-viewer" title="Newton Asha CV"></iframe>
+            <div class="mt-6 text-center text-gray-600">
+                <p>If the PDF doesn't load, <a href="Asha_Curriculum_Vitae.pdf" download class="text-blue-600 hover:underline">click here to download it</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animate skill bars when scrolled into view
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate skill bars
+                    const skillFills = document.querySelectorAll('.skill-fill');
+                    skillFills.forEach(fill => {
+                        // Reset width to 0 then animate to actual width
+                        const targetWidth = fill.style.width;
+                        fill.style.width = '0%';
+                        setTimeout(() => {
+                            fill.style.width = targetWidth;
+                        }, 300);
+                    });
+                    
+                    // Stop observing after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // CV Modal functionality
+        const modal = document.getElementById('cv-modal');
+        const openCvModalBtn = document.getElementById('open-cv-modal');
+        const viewCvBtn = document.getElementById('view-cv-btn');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const closeCvModalBtn = document.getElementById('close-cv-modal');
+        
+        // Open modal from both buttons
+        if (openCvModalBtn) {
+            openCvModalBtn.addEventListener('click', () => {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (viewCvBtn) {
+            viewCvBtn.addEventListener('click', () => {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        // Close modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        if (closeCvModalBtn) {
+            closeCvModalBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Print CV functionality
+        document.getElementById('print-cv').addEventListener('click', () => {
+            // Open the PDF in a new window for printing
+            const printWindow = window.open('Asha_Curriculum_Vitae.pdf', '_blank');
+            if (printWindow) {
+                printWindow.onload = function() {
+                    printWindow.print();
+                };
+            }
+        });
+        
+        // Print CV from modal
+        document.getElementById('print-cv-modal').addEventListener('click', () => {
+            const iframe = document.querySelector('.cv-viewer');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.print();
+            } else {
+                // Fallback
+                window.open('Asha_Curriculum_Vitae.pdf', '_blank').print();
+            }
+        });
+        
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const formMessage = document.getElementById('form-message');
+            
+            // Show loading state
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                to_email: 'ombuyanewton@gmail.com',
+                to_name: 'Newton Asha',
+                reply_to: document.getElementById('email').value
+            };
+            
+            // Send email using EmailJS
+            // Using your service ID and template ID
+            emailjs.send('service_2i9cbpb', 'template_r9lj6wr', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Show success message
+                    formMessage.className = 'bg-green-100 text-green-700 p-4 rounded-lg';
+                    formMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Your message has been sent successfully! I will get back to you soon.';
+                    formMessage.classList.remove('hidden');
+                    
+                    // Reset form
+                    document.getElementById('contact-form').reset();
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Scroll to form message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        formMessage.classList.add('hidden');
+                    }, 5000);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    
+                    // Show error message
+                    formMessage.className = 'bg-red-100 text-red-700 p-4 rounded-lg';
+                    formMessage.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> Failed to send message. Please try again or contact me directly at ombuyanewton@gmail.com';
+                    formMessage.classList.remove('hidden');
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Scroll to form message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+        });
+        
+        // Initialize skill bars with 0 width
+        window.addEventListener('DOMContentLoaded', () => {
+            const skillFills = document.querySelectorAll('.skill-fill');
+            skillFills.forEach(fill => {
+                const width = fill.style.width;
+                fill.style.width = '0%';
+                // Store the target width as a data attribute
+                fill.dataset.width = width;
+            });
+        });
+    </script>
+</body>
+</html>
