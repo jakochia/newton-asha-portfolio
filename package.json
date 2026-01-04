@@ -1,0 +1,21 @@
+{
+  "name": "newton-asha-portfolio",
+  "version": "1.0.0",
+  "description": "Newton Asha - Software Engineer Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve",
+    "build": "echo \"No build required for static site\"",
+    "start": "npx serve"
+  },
+  "keywords": [
+    "portfolio",
+    "software-engineer",
+    "speed-insights"
+  ],
+  "author": "Newton Asha Ombuya",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
