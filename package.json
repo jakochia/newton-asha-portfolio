@@ -18,5 +18,8 @@
     "url": "git+https://github.com/jakochia/newton-asha-portfolio.git"
   },
   "author": "Newton Asha Ombuya <ombuyanewton@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
 }
