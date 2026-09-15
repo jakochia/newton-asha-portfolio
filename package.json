@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemailer": "^10.0.10"
+  },
+  "name": "newton-asha-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Newton Asha, a Software Engineering student specializing in ethical hacking, IT support, and network fundamentals.",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakochia/newton-asha-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jakochia/newton-asha-portfolio/issues"
+  },
+  "homepage": "https://github.com/jakochia/newton-asha-portfolio#readme"
+}
