@@ -10,7 +10,7 @@ Professional portfolio website for Newton Asha, a Software Engineering student s
 - 🎨 Modern UI with Tailwind CSS
 
 ## Live Demo
-Visit: [https://newton-asha-portfolio.vercel.app](https://newton-asha-portfolio.vercel.app)
+Visit: [https://jakochia.co.ke](https://jakochia.co.ke)
 
 ## Technologies Used
 - HTML5
