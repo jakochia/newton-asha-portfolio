@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Newton Asha Ombuya — ICT Support, Networking & Software Engineering. Cisco Networking Academy Instructor based in Nairobi, Kenya.">
+    <meta name="author" content="Newton Asha Ombuya">
+    <meta name="theme-color" content="#0f172a">
+    <title>Newton Asha — ICT Support · Networking · Software Engineering</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237dd3a8'/%3E%3Cstop offset='0.5' stop-color='%23b8e6c9'/%3E%3Cstop offset='1' stop-color='%23f0f9f4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23g)'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Helvetica,Arial,sans-serif' font-size='180' font-weight='800' fill='%231f2937' text-anchor='middle' dominant-baseline='middle' letter-spacing='-6'%3EASHA%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237dd3a8'/%3E%3Cstop offset='0.5' stop-color='%23b8e6c9'/%3E%3Cstop offset='1' stop-color='%23f0f9f4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23g)'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Helvetica,Arial,sans-serif' font-size='180' font-weight='800' fill='%231f2937' text-anchor='middle' dominant-baseline='middle' letter-spacing='-6'%3EASHA%3C/text%3E%3C/svg%3E">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50:  '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+
+        .nav-link { position: relative; }
+        .nav-link.active { color: #2563eb; font-weight: 600; }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 2px;
+            background: #2563eb;
+            border-radius: 2px;
+        }
+        .mobile-nav-link.active {
+            color: #2563eb;
+            font-weight: 600;
+            background: #eff6ff;
+            border-radius: 8px;
+        }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-pic {
+            transition: transform 0.5s ease;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+        }
+        .profile-pic:hover { transform: scale(1.03); }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 18px; height: 18px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .blog-gradient {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .hidden { display: none !important; }
+
+        .verified-tick {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center gap-3">
+
+            <!-- Logo + name (always visible) -->
+            <a href="#home" class="text-base sm:text-lg lg:text-xl font-extrabold text-slate-900 flex items-center gap-2 flex-shrink-0">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-sm flex-shrink-0">N</span>
+                <span class="whitespace-nowrap">Newton Asha Ombuya</span>
+                <svg class="verified-tick w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="#1d9bf0" xmlns="http://www.w3.org/2000/svg" title="Verified" aria-label="Verified">
+                    <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81C14.67 2.63 13.43 1.75 12 1.75s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+                </svg>
+            </a>
+
+            <!-- Desktop nav links (visible >= 768px) -->
+            <div class="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-7 flex-1 justify-center">
+                <a href="#home" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Home</a>
+                <a href="#about" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">About</a>
+                <a href="#skills" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#projects" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Projects</a>
+                <a href="#blog" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Blog</a>
+                <a href="#certifications" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Certifications</a>
+                <a href="#cv" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">CV</a>
+                <a href="#contact" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+            </div>
+
+            <!-- Hire Me CTA (>= 768px) -->
+            <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-700 text-white text-sm font-medium px-3 lg:px-4 py-2 rounded-lg transition-colors shadow-sm flex-shrink-0">
+                Hire Me <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+
+            <!-- Hamburger (visible < 768px) -->
+            <button id="mobile-menu-button" class="md:hidden text-slate-700 text-2xl flex-shrink-0" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile menu (< 768px) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-200 py-4 px-6">
+            <a href="#home" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Home</a>
+            <a href="#about" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">About</a>
+            <a href="#skills" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Skills</a>
+            <a href="#projects" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Projects</a>
+            <a href="#blog" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Blog</a>
+            <a href="#certifications" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Certifications</a>
+            <a href="#cv" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">CV</a>
+            <a href="#contact" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Contact</a>
+            <a href="#contact" class="block mt-3 py-3 px-3 bg-slate-900 hover:bg-blue-700 text-white rounded-lg text-center font-medium transition-colors">Hire Me →</a>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50">
+        <div class="absolute inset-0 -z-10 pointer-events-none">
+            <div class="absolute top-20 -left-20 w-96 h-96 rounded-full bg-blue-100/60 blur-3xl"></div>
+            <div class="absolute top-40 right-0 w-96 h-96 rounded-full bg-slate-200/50 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-8">
+                <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Available for opportunities
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+                    Hi, I'm <span class="accent-gradient">Newton Asha Ombuya</span><span class="inline-flex items-center align-middle ml-2"><svg viewBox="0 0 24 24" class="w-8 h-8 sm:w-9 sm:h-9 lg:w-11 lg:h-11" fill="#1d9bf0" xmlns="http://www.w3.org/2000/svg"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81C14.67 2.63 13.43 1.75 12 1.75s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg></span>.
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-3 text-slate-700 font-medium">
+                    <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-sm shadow-sm">ICT Support</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-sm shadow-sm">Networking</span>
+                    <span class="text-slate-300">•</span>
+                    <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-sm shadow-sm">Software Engineering</span>
+                </div>
+
+                <p class="text-lg text-slate-600 max-w-xl leading-relaxed">
+                    Cisco Networking Academy Instructor with hands-on experience in ICT user support, Cisco device configuration, network troubleshooting, and software development. Currently pursuing diplomas at <strong class="text-slate-900">ICS College</strong> and <strong class="text-slate-900">MOHI TTI</strong>.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#projects" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-xl transition-all shadow-lg shadow-slate-900/10 hover:shadow-blue-600/20">
+                        <i class="fas fa-folder-open"></i> View Projects
+                    </a>
+                    <a href="https://blog.jakochia.co.ke" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-900 font-medium px-6 py-3 rounded-xl transition-all">
+                        <i class="fas fa-blog text-blue-600"></i> Read Blog
+                    </a>
+                    <a href="#cv" class="inline-flex items-center gap-2 bg-green-50 hover:bg-green-100 border border-green-200 text-green-700 font-medium px-6 py-3 rounded-xl transition-all">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center lg:justify-end">
+                <div class="relative">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 blur-2xl opacity-20"></div>
+                    <img src="asha.jpg" alt="Newton Asha" class="profile-pic relative w-64 h-64 lg:w-80 lg:h-80">
+                    <div class="absolute -bottom-2 -right-2 bg-white rounded-2xl shadow-xl p-3 border border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                                <i class="fas fa-network-wired text-blue-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-500 uppercase tracking-wide">Cisco Academy</p>
+                                <p class="text-xs font-bold text-slate-900">Instructor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                    <p class="text-3xl font-extrabold text-slate-900">10+</p>
+                    <p class="text-sm text-slate-500 mt-1">Certifications</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                    <p class="text-3xl font-extrabold text-slate-900">6+</p>
+                    <p class="text-sm text-slate-500 mt-1">GitHub Projects</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                    <p class="text-3xl font-extrabold text-slate-900">1+</p>
+                    <p class="text-sm text-slate-500 mt-1">Years Teaching</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
+                    <p class="text-3xl font-extrabold text-slate-900">2</p>
+                    <p class="text-sm text-slate-500 mt-1">Diplomas Ongoing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ABOUT ═══════════ -->
+    <section id="about" class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mb-16">
+                <p class="text-blue-600 font-semibold text-sm tracking-wider uppercase mb-3">About Me</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Building technology that <span class="accent-gradient">supports people</span>.
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6 text-slate-600 leading-relaxed">
+                    <p>
+                        I'm a Software Engineering student currently pursuing a <strong class="text-slate-900">Diploma in Software Development at ICS College</strong> and a <strong class="text-slate-900">Diploma in Software Engineering at MOHI Technical Training Institute</strong>. I serve as a Cisco Networking Academy Instructor, where I teach networking fundamentals, computer systems, cybersecurity awareness, and effective technology use.
+                    </p>
+                    <p>
+                        My journey began in 2024 with an <strong class="text-slate-900">Advanced IT certificate at MOHI Technical Training, Pangani</strong> — the program that first introduced me to programming and sparked my career in technology. Since then, I've earned multiple Cisco certifications, built web applications, and supported dozens of learners and staff in ICT environments.
+                    </p>
+                    <p>
+                        I have a strong problem-solving, communication, and customer-service orientation, with a proactive approach to technical support. I document everything, I escalate when needed, and I never leave a user stuck.
+                    </p>
+
+                    <div class="pt-6">
+                        <h3 class="text-lg font-bold text-slate-900 mb-4">What I focus on</h3>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">First-line ICT support & troubleshooting</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">Cisco routing, switching & LAN support</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">Windows & Linux system administration</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">Web development & database design</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">User training & technical documentation</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                <p class="text-sm text-slate-700">Basic information security practices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-6">
+                        <i class="fas fa-map-marker-alt text-blue-600 text-xl mb-3"></i>
+                        <p class="text-xs text-slate-500 uppercase tracking-wide">Location</p>
+                        <p class="font-semibold text-slate-900">Nairobi, Kenya</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-6">
+                        <i class="fas fa-briefcase text-blue-600 text-xl mb-3"></i>
+                        <p class="text-xs text-slate-500 uppercase tracking-wide">Currently</p>
+                        <p class="font-semibold text-slate-900">Cisco Instructor @ MOHI Namarei</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl border border-slate-100 p-6">
+                        <i class="fas fa-graduation-cap text-blue-600 text-xl mb-3"></i>
+                        <p class="text-xs text-slate-500 uppercase tracking-wide">Studying</p>
+                        <p class="font-semibold text-slate-900">ICS College • MOHI TTI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ SKILLS ═══════════ -->
+    <section id="skills" class="py-24 bg-slate-50 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mb-16">
+                <p class="text-blue-600 font-semibold text-sm tracking-wider uppercase mb-3">Skills</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Tools & technologies I <span class="accent-gradient">work with</span>.
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card bg-white rounded-2xl border border-slate-100 p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-5">
+                        <i class="fas fa-headset text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ICT Support</h3>
+                    <p class="text-sm text-slate-600 mb-5">End-user support, hardware & software troubleshooting, ICT asset documentation, and user training.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-medium">Help Desk</span>
+                        <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-medium">Windows</span>
+                        <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-medium">Linux</span>
+                        <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-medium">Kali</span>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-5">
+                        <i class="fas fa-network-wired text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Networking</h3>
+                    <p class="text-sm text-slate-600 mb-5">LAN/WAN connectivity, Cisco router & switch configuration, cabling, and network troubleshooting.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-md font-medium">Cisco</span>
+                        <span class="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-md font-medium">TCP/IP</span>
+                        <span class="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-md font-medium">Packet Tracer</span>
+                        <span class="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-md font-medium">Routing</span>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-8">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-200 flex items-center justify-center mb-5">
+                        <i class="fas fa-code text-slate-700 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Software Engineering</h3>
+                    <p class="text-sm text-slate-600 mb-5">Building web applications with modern frameworks, database design, and deployment.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">Node.js</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">Express</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">MongoDB</span>
+                        <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">Git</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-white rounded-2xl border border-slate-100 p-8">
+                <h3 class="text-lg font-bold text-slate-900 mb-5">Full Stack of Tools & Technologies</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Cisco Packet Tracer</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Cisco Routers & Switches</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Windows</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Linux</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Kali Linux</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">LAN/WAN</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">TCP/IP</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Network Cabling</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Node.js</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Express</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">MongoDB</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">MySQL / SQL</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">PHP</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Git / GitHub</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Vercel</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">VirtualBox</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Termux</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PROJECTS ═══════════ -->
+    <section id="projects" class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-16">
+                <div class="max-w-3xl">
+                    <p class="text-blue-600 font-semibold text-sm tracking-wider uppercase mb-3">Projects</p>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                        Selected <span class="accent-gradient">work</span>.
+                    </h2>
+                </div>
+                <a href="https://github.com/jakochia?tab=repositories" target="_blank" class="inline-flex items-center gap-2 text-slate-700 hover:text-blue-600 font-medium text-sm">
+                    All repositories <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <a href="https://github.com/jakochia/asha" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
+                    <div class="h-40 bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center">
+                        <i class="fas fa-code text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">asha</h3>
+                            <i class="fab fa-github text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Personal portfolio and project repository.</p>
+                        <span class="text-xs text-blue-600 font-medium">View project →</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/jakochia/jakochia-academy" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
+                    <div class="h-40 bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">jakochia-academy</h3>
+                            <i class="fab fa-github text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Academic platform for learning and development.</p>
+                        <span class="text-xs text-blue-600 font-medium">View project →</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/jakochia/error404-dev-platform" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
+                    <div class="h-40 bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+                        <i class="fas fa-cogs text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">error404-dev-platform</h3>
+                            <i class="fab fa-github text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Development platform focused on scalable web infrastructure.</p>
+                        <span class="text-xs text-blue-600 font-medium">View project →</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/jakochia/event-management" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
+                    <div class="h-40 bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center">
+                        <i class="fas fa-calendar-check text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">event-management</h3>
+                            <i class="fab fa-github text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">PHP-based event management system for scheduling and tracking.</p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium">PHP</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/jakochia/health-system" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
+                    <div class="h-40 bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
+                        <i class="fas fa-heartbeat text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">health-system</h3>
+                            <i class="fab fa-github text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">PHP-based health management system for patient records.</p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded font-medium">PHP</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://mohi-cisco-portal.onrender.com/" target="_blank" rel="noopener" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group flex flex-col">
+                    <div class="h-40 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center relative overflow-hidden">
+                        <i class="fas fa-chalkboard-user text-white text-5xl group-hover:scale-110 transition-transform duration-500"></i>
+                        <span class="absolute top-3 right-3 text-[10px] bg-white/15 text-white px-2 py-0.5 rounded-full font-medium backdrop-blur-sm">Live</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-900">MOHI Cisco Portal</h3>
+                            <i class="fas fa-external-link-alt text-slate-400 text-xs"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4 flex-1">Web-based portal for Cisco training administration and tracking — deployed live on Render.</p>
+                        <div class="flex gap-2 mb-3">
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-medium">Node.js</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-medium">MongoDB</span>
+                            <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium">Render</span>
+                        </div>
+                        <span class="text-xs text-blue-600 font-medium">View live →</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ BLOG ═══════════ -->
+    <section id="blog" class="py-24 blog-gradient text-white reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-blue-300 font-semibold text-sm tracking-wider uppercase mb-3">Blog</p>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+                        I write about <span class="text-blue-300">tech, support & learning</span>.
+                    </h2>
+                    <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                        Insights, tutorials, and reflections on ICT support, Cisco networking, software engineering, and the journey of learning technology from the ground up.
+                    </p>
+                    <a href="https://blog.jakochia.co.ke" target="_blank" class="inline-flex items-center gap-3 bg-white text-slate-900 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-external-link-alt"></i>
+                        Visit blog.jakochia.co.ke
+                    </a>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                            <i class="fas fa-pen-fancy text-blue-300"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-blue-300 uppercase tracking-wider">Latest from the blog</p>
+                            <p class="font-semibold">Thoughts, tutorials & field notes</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-slate-200">
+                            <i class="fas fa-arrow-right text-blue-300 mt-1 text-xs"></i>
+                            <span>Lessons from teaching Cisco networking to beginners</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-200">
+                            <i class="fas fa-arrow-right text-blue-300 mt-1 text-xs"></i>
+                            <span>Setting up a lab with Cisco Packet Tracer</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-200">
+                            <i class="fas fa-arrow-right text-blue-300 mt-1 text-xs"></i>
+                            <span>From Advanced IT to Software Engineering — my path</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CERTIFICATIONS ═══════════ -->
+    <section id="certifications" class="py-24 bg-slate-50 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mb-16">
+                <p class="text-blue-600 font-semibold text-sm tracking-wider uppercase mb-3">Certifications</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Credentials & <span class="accent-gradient">training</span>.
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-fuchsia-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-fuchsia-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-rocket text-fuchsia-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Advanced IT</h3>
+                            <p class="text-xs text-slate-600">MOHI Technical Training, Pangani</p>
+                            <p class="text-[11px] text-slate-400 mt-1">2024 • Introduced me to programming</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-blue-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-network-wired text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">CCNA: Introduction to Networks</h3>
+                            <p class="text-xs text-slate-600">University of Jos</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Cisco Networking Academy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-blue-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-router text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">CCNA 2: Switching, Routing & Wireless</h3>
+                            <p class="text-xs text-slate-600">University of Jos</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Cisco Networking Academy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-red-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user-secret text-red-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Ethical Hacker</h3>
+                            <p class="text-xs text-slate-600">Cisco Networking Academy</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Cybersecurity fundamentals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-green-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-headset text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">IT Customer Support Basics</h3>
+                            <p class="text-xs text-slate-600">Cisco Networking Academy</p>
+                            <p class="text-[11px] text-slate-400 mt-1">User support fundamentals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-slate-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-brain text-slate-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Artificial Intelligence</h3>
+                            <p class="text-xs text-slate-600">Moringa School</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Feb 2026 • Part-time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-indigo-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-database text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Data Fundamentals</h3>
+                            <p class="text-xs text-slate-600">ICT Authority · IBM</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Sep 2026</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-yellow-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-laptop text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Basic ICT Competence</h3>
+                            <p class="text-xs text-slate-600">MOHI Gap-Year Training</p>
+                            <p class="text-[11px] text-slate-400 mt-1">2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-teal-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-code-branch text-teal-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Full Stack Internship (Demo)</h3>
+                            <p class="text-xs text-slate-600">Edureka / Veranda Enterprise</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Sep 2025</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CV ═══════════ -->
+    <section id="cv" class="py-24 bg-slate-900 text-white reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-blue-400 font-semibold text-sm tracking-wider uppercase mb-3">Curriculum Vitae</p>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+                        Get the full story.
+                    </h2>
+                    <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                        My CV covers my professional experience as a Cisco Networking Academy Instructor, education at ICS College and MOHI TTI, certifications, technical skills, and project work.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start gap-4 bg-slate-800/60 border border-slate-700/60 rounded-xl p-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-700/60 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-chalkboard-teacher text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm text-white">Cisco Networking Academy Instructor</p>
+                                <p class="text-slate-400 text-xs mt-0.5">MOHI Namarei, Marsabit County | Current</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-slate-800/60 border border-slate-700/60 rounded-xl p-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-700/60 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm text-white">Diploma in Software Development</p>
+                                <p class="text-slate-400 text-xs mt-0.5">ICS College | Current</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 bg-slate-800/60 border border-slate-700/60 rounded-xl p-4">
+                            <div class="w-10 h-10 rounded-lg bg-slate-700/60 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm text-white">Diploma in Software Engineering</p>
+                                <p class="text-slate-400 text-xs mt-0.5">MOHI Technical Training Institute | Ongoing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="Newton_Asha_CV.pdf" download class="inline-flex items-center gap-2 bg-white text-slate-900 font-semibold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors">
+                            <i class="fas fa-download"></i> Download CV (PDF)
+                        </a>
+                        <a href="Newton_Asha_CV.pdf" target="_blank" class="inline-flex items-center gap-2 bg-transparent border border-slate-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-slate-800 transition-colors">
+                            <i class="fas fa-eye"></i> View Online
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-8 w-full max-w-sm text-center">
+                        <div class="w-20 h-20 rounded-2xl bg-slate-700/60 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-file-pdf text-3xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1 text-white flex items-center justify-center gap-2">
+                            Newton Asha Ombuya
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1d9bf0" xmlns="http://www.w3.org/2000/svg"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81C14.67 2.63 13.43 1.75 12 1.75s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+                        </h3>
+                        <p class="text-slate-400 text-sm mb-4">ICT Support · Networking · Software Engineering</p>
+                        <div class="h-px bg-slate-700 my-4"></div>
+                        <div class="grid grid-cols-2 gap-4 text-left text-xs">
+                            <div>
+                                <p class="text-slate-500 uppercase tracking-wider">Updated</p>
+                                <p class="font-medium text-slate-200">2026</p>
+                            </div>
+                            <div>
+                                <p class="text-slate-500 uppercase tracking-wider">Location</p>
+                                <p class="font-medium text-slate-200">Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CONTACT ═══════════ -->
+    <section id="contact" class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mb-16">
+                <p class="text-blue-600 font-semibold text-sm tracking-wider uppercase mb-3">Contact</p>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+                    Let's <span class="accent-gradient">work together</span>.
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-8">
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="mailto:ombuyanewton@gmail.com" class="flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-100 rounded-2xl p-5 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wide">Email</p>
+                            <p class="font-semibold text-slate-900 text-sm">ombuyanewton@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="tel:+254743270114" class="flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-100 rounded-2xl p-5 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wide">Phone</p>
+                            <p class="font-semibold text-slate-900 text-sm">+254 (743) 270-114</p>
+                        </div>
+                    </a>
+
+                    <div class="flex items-center gap-4 bg-slate-50 border border-slate-100 rounded-2xl p-5">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wide">Location</p>
+                            <p class="font-semibold text-slate-900 text-sm">Nairobi, Kenya</p>
+                        </div>
+                    </div>
+
+                    <a href="https://blog.jakochia.co.ke" target="_blank" class="flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-100 rounded-2xl p-5 transition-colors">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-blog text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-wide">Blog</p>
+                            <p class="font-semibold text-slate-900 text-sm">blog.jakochia.co.ke</p>
+                        </div>
+                    </a>
+
+                    <div class="pt-4">
+                        <p class="text-xs text-slate-500 uppercase tracking-wide mb-3">Follow Me</p>
+                        <div class="flex gap-3">
+                            <a href="https://twitter.com/j_kochia" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-blue-500 hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/la.flame.drone" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-pink-500 hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/jakochia" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/newton-ombuya-776566356" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://blog.jakochia.co.ke" target="_blank" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-indigo-600 hover:text-white text-slate-600 flex items-center justify-center transition-colors">
+                                <i class="fas fa-blog"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 sm:p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-bold text-slate-900">Send a message</h3>
+                            <span id="email-status" class="text-xs bg-slate-200 text-slate-700 px-3 py-1 rounded-full">Checking…</span>
+                        </div>
+
+                        <div id="status-alert" class="hidden mb-4"></div>
+
+                        <form id="contact-form" class="space-y-4">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block text-xs font-medium text-slate-700 mb-2">Your Name *</label>
+                                    <input type="text" id="name" name="name" required
+                                        class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                        placeholder="Newton Ombuya">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-xs font-medium text-slate-700 mb-2">Your Email *</label>
+                                    <input type="email" id="email" name="email" required
+                                        class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                                        placeholder="your@example.com">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-medium text-slate-700 mb-2">Message *</label>
+                                <textarea id="message" name="message" rows="5" required
+                                    class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm resize-none"
+                                    placeholder="Tell me about your project or question…"></textarea>
+                            </div>
+
+                            <button type="submit" id="submit-btn"
+                                class="w-full bg-slate-900 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                                <span id="btn-text">Send Message</span>
+                                <div id="btn-loading" class="loading hidden"></div>
+                            </button>
+                        </form>
+
+                        <div id="message-status" class="mt-6 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="bg-slate-900 text-slate-300 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <p class="font-extrabold text-white text-lg mb-1 flex items-center gap-2 justify-center md:justify-start">
+                        Newton Asha Ombuya
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#1d9bf0" xmlns="http://www.w3.org/2000/svg"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81C14.67 2.63 13.43 1.75 12 1.75s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+                    </p>
+                    <p class="text-sm text-slate-400">ICT Support · Networking · Software Engineering</p>
+                </div>
+                <div class="flex gap-4 text-sm">
+                    <a href="https://blog.jakochia.co.ke" target="_blank" class="hover:text-white transition-colors">Blog</a>
+                    <a href="https://github.com/jakochia" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://www.linkedin.com/in/newton-ombuya-776566356" target="_blank" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-slate-500">
+                <p>© <span id="year"></span> Newton Asha. All rights reserved.</p>
+                <p>Designed & built in Nairobi, Kenya 🇰🇪</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const mobileBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const id = this.getAttribute('href');
+                if (id === '#' || id.length < 2) return;
+                const target = document.querySelector(id);
+                if (!target) return;
+                e.preventDefault();
+                window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
+            });
+        });
+
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
+            let current = 'home';
+            const pos = window.scrollY + 120;
+            sections.forEach(s => {
+                if (pos >= s.offsetTop) current = s.id;
+            });
+            links.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', updateActiveNav);
+        window.addEventListener('load', updateActiveNav);
+
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        async function checkEmailStatus() {
+            const el = document.getElementById('email-status');
+            try {
+                const res = await fetch('/api/test');
+                const data = await res.json();
+                if (data.emailEnabled) {
+                    el.textContent = '✅ Email active';
+                    el.className = 'text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full';
+                } else {
+                    el.textContent = '⚠️ Email disabled';
+                    el.className = 'text-xs bg-amber-100 text-amber-700 px-3 py-1 rounded-full';
+                }
+            } catch {
+                el.textContent = '⚠️ Server offline';
+                el.className = 'text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full';
+            }
+        }
+        checkEmailStatus();
+
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnLoading = document.getElementById('btn-loading');
+        const statusAlert = document.getElementById('status-alert');
+        const messageStatus = document.getElementById('message-status');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
+
+            if (!data.name || !data.email || !data.message) {
+                showAlert('Please fill in all fields.', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending…';
+            btnLoading.classList.remove('hidden');
+            statusAlert.classList.add('hidden');
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    showAlert(result.message, 'success');
+                    messageStatus.classList.remove('hidden');
+                    messageStatus.innerHTML = `
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4 text-sm">
+                            <p class="font-semibold text-green-800 mb-1">✓ Message sent</p>
+                            <p class="text-green-700 text-xs">I'll get back to you at <strong>${data.email}</strong> soon.</p>
+                        </div>`;
+                    form.reset();
+                } else {
+                    showAlert(result.message || 'Failed to send.', 'error');
+                }
+            } catch (err) {
+                showAlert('Network error. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send Message';
+                btnLoading.classList.add('hidden');
+            }
+        });
+
+        function showAlert(msg, type) {
+            statusAlert.className = 'mb-4 p-3 rounded-xl text-sm border ' + (
+                type === 'success'
+                    ? 'bg-green-50 border-green-200 text-green-800'
+                    : 'bg-red-50 border-red-200 text-red-800'
+            );
+            statusAlert.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>${msg}`;
+            statusAlert.classList.remove('hidden');
+            setTimeout(() => statusAlert.classList.add('hidden'), 6000);
+        }
+    </script>
+</body>
+</html>
