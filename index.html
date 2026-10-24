@@ -8,14 +8,16 @@
     <meta name="theme-color" content="#0f172a">
     <title>Newton Asha — ICT Support · Networking · Software Engineering</title>
 
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237dd3a8'/%3E%3Cstop offset='0.5' stop-color='%23b8e6c9'/%3E%3Cstop offset='1' stop-color='%23f0f9f4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23g)'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Helvetica,Arial,sans-serif' font-size='180' font-weight='800' fill='%231f2937' text-anchor='middle' dominant-baseline='middle' letter-spacing='-6'%3EASHA%3C/text%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237dd3a8'/%3E%3Cstop offset='0.5' stop-color='%23b8e6c9'/%3E%3Cstop offset='1' stop-color='%23f0f9f4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23g)'/%3E%3Ctext x='50%25' y='54%25' font-family='Inter,Helvetica,Arial,sans-serif' font-size='180' font-weight='800' fill='%231f2937' text-anchor='middle' dominant-baseline='middle' letter-spacing='-6'%3EASHA%3C/text%3E%3C/svg%3E">
-
     
+    <!-- Tailwind Compiled CSS -->
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <style>
         * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         html { scroll-behavior: smooth; }
@@ -92,10 +94,10 @@
 <body class="bg-slate-50 text-slate-800 antialiased">
 
     <!-- ═══════════ NAVIGATION ═══════════ -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200 transition-all duration-300">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-b border-slate-200 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex justify-between items-center gap-3">
 
-            <!-- Logo + name (always visible) -->
+            <!-- Logo -->
             <a href="#home" class="text-base sm:text-lg lg:text-xl font-extrabold text-slate-900 flex items-center gap-2 flex-shrink-0">
                 <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-sm flex-shrink-0">N</span>
                 <span class="whitespace-nowrap">Newton Asha Ombuya</span>
@@ -104,8 +106,8 @@
                 </svg>
             </a>
 
-            <!-- Desktop nav links (visible >= 768px) -->
-            <div class="flex items-center gap-3 lg:gap-5 xl:gap-7 flex-1 justify-center">
+            <!-- Desktop Nav Links (Always visible on md and up) -->
+            <div class="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-7 flex-1 justify-center">
                 <a href="#home" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Home</a>
                 <a href="#about" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">About</a>
                 <a href="#skills" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Skills</a>
@@ -116,19 +118,19 @@
                 <a href="#contact" class="nav-link text-sm text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
             </div>
 
-            <!-- Hire Me CTA (>= 768px) -->
+            <!-- Desktop CTA -->
             <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-700 text-white text-sm font-medium px-3 lg:px-4 py-2 rounded-lg transition-colors shadow-sm flex-shrink-0">
                 Hire Me <i class="fas fa-arrow-right text-xs"></i>
             </a>
 
-            <!-- Hamburger (visible < 768px) -->
+            <!-- Mobile Hamburger Button -->
             <button id="mobile-menu-button" class="md:hidden text-slate-700 text-2xl flex-shrink-0" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
 
-        <!-- Mobile menu (< 768px) -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-200 py-4 px-6">
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-200 py-4 px-6 shadow-lg absolute top-16 left-0 right-0">
             <a href="#home" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Home</a>
             <a href="#about" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">About</a>
             <a href="#skills" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Skills</a>
@@ -137,7 +139,7 @@
             <a href="#certifications" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Certifications</a>
             <a href="#cv" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">CV</a>
             <a href="#contact" class="mobile-nav-link block py-3 px-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Contact</a>
-            <a href="#contact" class="block mt-3 py-3 px-3 bg-slate-900 hover:bg-blue-700 text-white rounded-lg text-center font-medium transition-colors">Hire Me →</a>
+            <a href="#contact" class="block mt-4 py-3 px-3 bg-slate-900 hover:bg-blue-700 text-white rounded-lg text-center font-medium transition-colors">Hire Me →</a>
         </div>
     </nav>
 
@@ -206,12 +208,12 @@
         <div class="max-w-7xl mx-auto px-6 mt-20">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-                    <p class="text-3xl font-extrabold text-slate-900">10+</p>
+                    <p class="text-3xl font-extrabold text-slate-900">12+</p>
                     <p class="text-sm text-slate-500 mt-1">Certifications</p>
                 </div>
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-                    <p class="text-3xl font-extrabold text-slate-900">6+</p>
-                    <p class="text-sm text-slate-500 mt-1">GitHub Projects</p>
+                    <p class="text-3xl font-extrabold text-slate-900">7+</p>
+                    <p class="text-sm text-slate-500 mt-1">Projects</p>
                 </div>
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
                     <p class="text-3xl font-extrabold text-slate-900">1+</p>
@@ -369,8 +371,12 @@
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">MongoDB</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">MySQL / SQL</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">PHP</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Python</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">FastAPI</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">PostgreSQL</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Git / GitHub</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Vercel</span>
+                    <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Render</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">VirtualBox</span>
                     <span class="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg font-medium">Termux</span>
                 </div>
@@ -394,6 +400,47 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Jakochia LearnAI -->
+                <a href="https://jakochia-learnai.onrender.com" target="_blank" rel="noopener" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group flex flex-col md:col-span-2 lg:col-span-3">
+                    <div class="h-64 bg-gradient-to-br from-[#0d9488] to-[#0f766e] flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                        <i class="fas fa-brain text-white text-7xl group-hover:scale-110 transition-transform duration-500 relative z-10"></i>
+                        <span class="absolute top-4 right-4 text-xs bg-white/20 text-white px-3 py-1 rounded-full font-medium backdrop-blur-sm border border-white/30">Featured AI Project</span>
+                    </div>
+                    <div class="p-8 flex flex-col flex-1">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-slate-900">Jakochia LearnAI</h3>
+                            <div class="flex gap-3 text-slate-400">
+                                <i class="fab fa-github hover:text-slate-900 transition-colors" title="View Source Code"></i>
+                                <i class="fas fa-external-link-alt hover:text-slate-900 transition-colors" title="View Live Site"></i>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 mb-6 leading-relaxed">
+                            A full-stack AI learning platform that transforms personal study materials into an interactive learning environment. Students can upload PDFs, DOCX, PPTX, TXT, Markdown files, and images, then use AI-powered tools to understand, practice, and track their learning.
+                        </p>
+                        <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                            <ul class="text-sm text-slate-600 space-y-2">
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> RAG-powered AI chat with citations</li>
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> Adaptive quizzes & weak-topic detection</li>
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> AI flashcards with spaced repetition</li>
+                            </ul>
+                            <ul class="text-sm text-slate-600 space-y-2">
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> Personalized study plans</li>
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> Learning analytics & tracking</li>
+                                <li><i class="fas fa-check text-teal-500 mr-2"></i> Secure auth & document management</li>
+                            </ul>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">Python</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">FastAPI</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">PostgreSQL</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">pgvector</span>
+                            <span class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded font-medium">Docker</span>
+                            <span class="text-xs bg-teal-50 text-teal-700 px-2.5 py-1 rounded font-medium">AI APIs</span>
+                        </div>
+                    </div>
+                </a>
 
                 <a href="https://github.com/jakochia/asha" target="_blank" class="card bg-white rounded-2xl border border-slate-100 overflow-hidden group">
                     <div class="h-40 bg-gradient-to-br from-blue-600 to-blue-500 flex items-center justify-center">
@@ -591,6 +638,19 @@
                     </div>
                 </div>
 
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-blue-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-shield-alt text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">CCNA: Enterprise Networking, Security, and Automation</h3>
+                            <p class="text-xs text-slate-600">University of Jos</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Cisco Networking Academy</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-red-500">
                     <div class="flex items-start gap-4">
                         <div class="w-11 h-11 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
@@ -617,6 +677,19 @@
                     </div>
                 </div>
 
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-indigo-500">
+                    <div class="flex items-start gap-4">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-database text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Data Fundamentals</h3>
+                            <p class="text-xs text-slate-600">ICT Authority · IBM</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Sep 2026</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-slate-500">
                     <div class="flex items-start gap-4">
                         <div class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
@@ -630,15 +703,15 @@
                     </div>
                 </div>
 
-                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-indigo-500">
+                <div class="card bg-white rounded-2xl border border-slate-100 p-6 border-l-4 border-l-pink-500">
                     <div class="flex items-start gap-4">
-                        <div class="w-11 h-11 rounded-xl bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-database text-indigo-600"></i>
+                        <div class="w-11 h-11 rounded-xl bg-pink-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-paint-brush text-pink-600"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">Data Fundamentals</h3>
-                            <p class="text-xs text-slate-600">ICT Authority · IBM</p>
-                            <p class="text-[11px] text-slate-400 mt-1">Sep 2026</p>
+                            <h3 class="font-bold text-slate-900 text-sm leading-snug mb-1">2D Animation with Canva</h3>
+                            <p class="text-xs text-slate-600">ICT Authority · ADMI</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Oct 2026</p>
                         </div>
                     </div>
                 </div>
@@ -903,11 +976,13 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Mobile menu toggle
         const mobileBtn = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
         mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
 
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const id = this.getAttribute('href');
@@ -919,6 +994,7 @@
             });
         });
 
+        // Active nav highlight
         function updateActiveNav() {
             const sections = document.querySelectorAll('section');
             const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
@@ -934,6 +1010,7 @@
         window.addEventListener('scroll', updateActiveNav);
         window.addEventListener('load', updateActiveNav);
 
+        // Scroll reveal
         const revealObs = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
@@ -944,6 +1021,7 @@
         }, { threshold: 0.08 });
         document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
+        // Email status check
         async function checkEmailStatus() {
             const el = document.getElementById('email-status');
             try {
@@ -963,6 +1041,7 @@
         }
         checkEmailStatus();
 
+        // Contact form
         const form = document.getElementById('contact-form');
         const submitBtn = document.getElementById('submit-btn');
         const btnText = document.getElementById('btn-text');
